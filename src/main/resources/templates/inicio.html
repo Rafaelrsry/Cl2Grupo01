@@ -213,7 +213,54 @@
                   </div>
                 </div>
                 <!-- Modal-->
-        
+			<div id="modale-emp" class="modale ocultar">
+				<div class="modale-header">
+					<h5>
+						Agregar Empleado <span id="close-emp">X</span>
+					</h5>
+				</div>
+				<div class="modale-body">
+					<form action="">
+
+						<label for="txtUsu">Ingresar Usuario :</label> <input type="text"
+							name="" id="txtUsu"> <label for="txtContraUsu">Ingresar
+							Contraseña :</label> <input type="text" name="" id="txtContraUsu">
+
+						<label for="txtNomUsu">Ingresar Nombres:</label> <input
+							type="text" name="" id="txtNomUsu"> <label
+							for="txtApeUsu">Ingresar Apellidos:</label> <input type="text"
+							name="" id="txtApeUsu"> <label for="txtVentasUsu">Ingresar
+							Ventas:</label> <input type="number" name="" id="txtVentasUsu"
+							placeholder="0"> <label for="cboTipoUsu">Tipo de
+							usuario:</label> <select name="" id="cboTipoUsu">
+							<option value="1">Administrador</option>
+							<option value="2">Empleado</option>
+						</select> <input type="hidden" id="hddidregistrousu">
+						<button class="btn btn-success btnmod" type="button"
+							id="btnguardarUsu">Guardar</button>
+					</form>
+				</div>
+			</div>
+
+			<!-- Modal eliminar -->
+			<div id="modale-pregunta" class="modale ocultar">
+				<div class="modale-header">
+
+					<h5>
+						<div id="Titulo">Eliminando Usuario</div>
+						<span id="close-pregu">X</span>
+					</h5>
+				</div>
+				<div class="modale-body">
+					<div>
+						<label id="mensajeeliminar"></label> <input type="hidden"
+							id="hddideliminarusuario" value="0">
+						<button type="button" class="btn btn-primary btnEliminar">Eliminar</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal eliminar hasta aqui -->
 
   
 <!-- MODALES -->
@@ -349,55 +396,75 @@
 
 			</div>
 
-			<div id="empleados"  style="display: none;">
+<!-- copiar esto -->
 
-        
-        <div class="mb-3">
-          <h1 class="text-center"> Empleados <span> <img src="img/paquete.png" th:src="@{/img/headhunting.png}" alt=""></span></h1>
+			<div id="empleados" style="display: none;">
 
-        <button type="button" class="btn btn-primary" id="btnAgregarEmpleado">Agregar Empleado</button>
 
-      </div>
+				<div class="mb-3">
+					<h1 class="text-center">
+						Empleados <span> <img src="img/paquete.png"
+							th:src="@{/img/headhunting.png}" alt=""></span>
+					</h1>
 
-      <div class="table-responsive">
-        <table class="table  table-hover table-bordered ">
-          <thead>
-            <tr>
-              <th scope="col">Codigo</th>
-              <th scope="col">Usuario</th>
-              <th scope="col">Contraseña</th>
-              <th scope="col">Nombres</th>
-              <th scope="col">Apellidos</th>
-              <th scope="col">Ventas</th>
-              <th scope="col">Tipo</th>
-              
-              
-              <th scope="col" colspan="2">Opciones</th>
-            </tr>
-          </thead>
-  
-          <tbody>
-               <tr th:each="usuario :${listausuario}">
-              <td th:text="${usuario.id_usuario}"></td>
-              <td th:text="${usuario.us_usuario}"></td>
-              <td th:text="${usuario.us_pass}"></td>
-              <td th:text="${usuario.us_nombres}"></td>
-               <td th:text="${usuario.us_apellidos}"></td>
-                <td th:text="${usuario.us_ventas}"></td>
-                 <td th:text="${usuario.us_tipo}"></td>
-              <td> 
-                  <span><a href="#"><img src="img/editar.png"  th:src="@{/img/editar.png}" alt=""></a></span>
-                  <span><a href="#"><img src="img/borrar.png" th:src="@{/img/borrar.png}" alt=""></a></span>
-              </td>              
-            </tr>
-  
+					<button type="button" class="btn btn-primary"
+						id="btnAgregarEmpleado">Agregar Empleado</button>
 
-            
-          </tbody>
-        </table>
-      </div> 
+				</div>
 
-      </div>
+				<div class="table-responsive vertscrol">
+					<table class="table  table-hover table-bordered" id="tblusu">
+						<thead>
+							<tr>
+								<th scope="col">Codigo</th>
+								<th scope="col">Usuario</th>
+								<th scope="col">Contraseña</th>
+								<th scope="col">Nombres</th>
+								<th scope="col">Apellidos</th>
+								<th scope="col">Ventas</th>
+								<th scope="col">Tipo</th>
+								<th scope="col" colspan="2">Opciones</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr th:each="usuario :${listausuario}">
+								<td th:text="${usuario.id_usuario}"></td>
+								<td th:text="${usuario.us_usuario}"></td>
+								<td th:text="${usuario.us_pass}"></td>
+								<td th:text="${usuario.us_nombres}"></td>
+								<td th:text="${usuario.us_apellidos}"></td>
+								<td th:text="${usuario.us_ventas}"></td>
+								<td th:text="${usuario.us_tipo}"></td>
+								<td>
+									<button type="button" class="btn btn-success btnActu"
+										th:data-id_usuario="${usuario.id_usuario}"
+										th:data-usu_usuario="${usuario.us_usuario}"
+										th:data-usu_pass="${usuario.us_pass}"
+										th:data-usu_nom="${usuario.us_nombres}"
+										th:data-usu_ape="${usuario.us_apellidos}"
+										th:data-usu_venta="${usuario.us_ventas}"
+										th:data-usu_tipo="${usuario.us_tipo}">
+										<i class="fas fa-pen"></i>
+									</button>
+								</td>
+								<td>
+									<button type="button" class="btn btn-danger btneliminarUsu"
+										th:data-id_usu="${usuario.id_usuario}"
+										th:data-usu_usuario="${usuario.us_usuario}">
+										<i class="fas fa-trash"></i>
+									</button>
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+			
+			<!-- copiar esto -->
+
 
 
 
@@ -456,6 +523,8 @@
   </main>
 
   <!--<script src="script.js"></script>-->
+  
+<script th:src="@{/js/scripts/usuarios.js}" type="text/javascript"></script>
   <script  th:src="@{/js/jquery/jquery-3.6.4.min.js}" type="text/javascript"> </script>
 <script  th:src="@{/js/scripts/clientes.js}" type="text/javascript"> </script>
   <script  th:src="@{/js/bootstrap/bootstrap.bundle.js}" type="text/javascript"> </script>

@@ -29,6 +29,12 @@ var xp = document.getElementById("productos");
 var xe = document.getElementById("empleados");
 var xenc = document.getElementById("encargos")
 
+let modalencargos = document.getElementById("modalEncargos")
+let modalpreguntaElmEnc = document.getElementById("modale-pregunta-elmenc")
+let btnAgregarEncargos = document.getElementById("btnAgregarEncargo")
+let cerrarEnc = document.getElementById("close-enc")
+let cerrarPreguElmEnc = document.getElementById("close-pregu-elmenc")
+
 function OcultarClientes() {
   
   if (x.style.display === "none") {
@@ -52,6 +58,7 @@ if (xenc.style.display === "block") {
 modalclientes.classList.add('ocultar')
 modalproductos.classList.add('ocultar')
 modalempleados.classList.add('ocultar')
+modalencargos.classList.add('ocultar')
 fondo.classList.add('ocultar')
 }
 
@@ -78,6 +85,7 @@ function OcultarProductos() {
   modalclientes.classList.add('ocultar')
   modalproductos.classList.add('ocultar')
   modalempleados.classList.add('ocultar')
+  modalencargos.classList.add('ocultar')
   fondo.classList.add('ocultar')
 
 } 
@@ -108,6 +116,7 @@ if (xe.style.display === "none") {
 modalclientes.classList.add('ocultar')
 modalproductos.classList.add('ocultar')
 modalempleados.classList.add('ocultar')
+modalencargos.classList.add('ocultar')
 fondo.classList.add('ocultar')
 
 }
@@ -141,6 +150,7 @@ if (xe.style.display === "block") {
   modalclientes.classList.add('ocultar')
   modalproductos.classList.add('ocultar')
   modalempleados.classList.add('ocultar')
+  modalencargos.classList.add('ocultar')
   fondo.classList.add('ocultar')
 
 }
@@ -203,5 +213,17 @@ cerrarPro.addEventListener('click',()=> {
 cerrarEmp.addEventListener('click',()=> {
 
   modalempleados.classList.add('ocultar')
+  fondo.classList.add('ocultar')
+})
+
+cerrarEnc.addEventListener('click',()=> {
+
+	modalencargos.classList.add('ocultar')
+	fondo.classList.add('ocultar')
+})
+
+cerrarPreguElmEnc.addEventListener('click',()=> {
+
+	modalpreguntaElmEnc.classList.add('ocultar')
   fondo.classList.add('ocultar')
 })

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import pe.cibertec.proyecto.service.ClienteService;
+import pe.cibertec.proyecto.service.EncargosService;
 import pe.cibertec.proyecto.service.UsuarioService;
 
 @Controller
@@ -17,7 +18,8 @@ public class HomeController {
 	private ClienteService clienteService;
 	@Autowired
 	private UsuarioService usuarioService;
-	
+	@Autowired
+	private EncargosService encargosService;
 	
 	
 	
@@ -25,7 +27,7 @@ public class HomeController {
 	public String listadoTotal(Model model) {
 		model.addAttribute("listacliente", clienteService.listarClientes());
 		model.addAttribute("listausuario", usuarioService.listarUsuario());
-		
+		model.addAttribute("listaencargos", encargosService.listarEncargos());
 		
 		return "inicio";
 	}

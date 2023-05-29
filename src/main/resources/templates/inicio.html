@@ -261,7 +261,48 @@
 			</div>
 
 			<!-- Modal eliminar hasta aqui -->
-
+			 <!-- Modal Encargos-->
+                <div id="modalEncargos" class="modale ocultar">
+                  <div class="modale-header">
+                      <h5>Agregar Encargo <span id="close-enc">X</span></h5>
+                  </div>
+                  <div class="modale-body">
+                      <form action="">
+                        
+                        <label for="txtanticipoEnc">Ingresar Anticipo:</label>
+                        <input type="text" id="txtanticipoEnc">
+          
+                        <label for="txtfechacreEnc">Ingresar Fecha Creacion:</label>
+                        <input type="text" id="txtfechacreEnc">
+                        
+                        <label for="txtfechaentEnc">Ingresar Fehca Entrega:</label>
+                        <input type="text" id="txtfechaentEnc">
+                        
+                        <label for="txtestadoEnc">Ingresar Estado:</label>
+                        <input type="text" id="txtestadoEnc">
+                        
+                        <input type="hidden" id="hddidregistroEnc">
+                        
+                       <button class="btn btn-success btnguardarEnc" type="submit"> Enviar</button>
+                      </form>
+                  </div>
+                </div>
+                
+                <!-- Modal eliminar -->
+            <div id="modale-pregunta-elmenc" class="modale ocultar" >
+		        <div class="modale-header">
+		          
+		            <h5> <div id="Titulo">Eliminando Encargo</div>   <span id="close-pregu-elmenc">X</span></h5>
+		        </div>
+		        <div class="modale-body">
+		        <div>
+		        	<label id="mensajeeliminarEnc"></label>
+							<input type="hidden" id="hddidelmenc" value="0">
+								<button type="button" class="btn btn-primary btneliminarElmEnc"
+								>Eliminar</button>
+		        </div>
+		        </div>
+		      </div>
   
 <!-- MODALES -->
 
@@ -474,17 +515,15 @@
         <div class="mb-3">
           <h1 class="text-center"> Encargos <span> <img src="img/paquete.png" th:src="@{/img/paquete.png}" alt=""></span></h1>
 
-       
+       <button type="button" class="btn btn-primary" id="btnAgregarEncargo">Agregar Encargo</button>
 
       </div>
 
       <div class="table-responsive">
-        <table class="table  table-hover table-bordered ">
+        <table class="table  table-hover table-bordered vertscrol" id="tblencargos">
           <thead>
             <tr>
               <th scope="col">IdEncargo</th>
-              <th scope="col">Producto</th>
-              <th scope="col">Cliente</th>
               <th scope="col">Anticipo</th>
               <th scope="col">Fecha Creacion</th>
               <th scope="col">Fecha de entrega</th>
@@ -497,18 +536,29 @@
           </thead>
   
           <tbody>
-            <tr class="">
-              <th scope="row">1</th>
-              <td>Torta Chocolate</td>
-              <td>Rafael rios</td>
-              <td> <span>S/.</span> 0</td>
-              <td>2023-04-10</td>
-              <td>2023-04-10</td>
-              <td>Completado</td>
-              <td> 
-                <span><a href="#"><img src="img/editar.png" th:src="@{/img/editar.png}" alt=""></a></span>
-                <span><a href="#"><img src="img/informacion.png" th:src="@{/img/informacion.png}" alt=""></a></span>
-              </td>              
+            <tr th:each="encargos :${listaencargos}">
+              <td th:text="${encargos.id_encargos}"></td>
+              <td th:text="${encargos.enc_anticipo}"></td>
+              <td th:text="${#dates.format(encargos.enc_fechacreacion, 'dd/MM/yyyy')}"></td>
+              <td th:text="${#dates.format(encargos.enc_fechaentrega, 'dd/MM/yyyy')}"></td>
+              <td th:text="${encargos.enc_estado}"></td>
+              <td>
+					<button type="button" class="btn btn-success btnactualizarEnc"
+						th:data-id_encargos="${encargos.id_encargos}"
+						th:data-enc_anticipo="${encargos.enc_anticipo}"
+						th:data-enc_fechacreacion="${encargos.enc_fechacreacion}"
+						th:data-enc_fechaentrega="${encargos.enc_fechaentrega}"
+						th:data-enc_estado="${encargos.enc_estado}">
+						<i class="fas fa-pen"></i>
+					</button>
+				</td>
+				<td>
+					<button type="button" class="btn btn-danger btneliminarEnc"
+						th:data-id_encargos="${encargos.id_encargos}"
+						>
+						<i class="fas fa-trash"></i>
+					</button>
+				</td>              
             </tr>
   
           
@@ -527,6 +577,7 @@
 <script th:src="@{/js/scripts/usuarios.js}" type="text/javascript"></script>
   <script  th:src="@{/js/jquery/jquery-3.6.4.min.js}" type="text/javascript"> </script>
 <script  th:src="@{/js/scripts/clientes.js}" type="text/javascript"> </script>
+<script src="js/scripts/encargos.js"></script>
   <script  th:src="@{/js/bootstrap/bootstrap.bundle.js}" type="text/javascript"> </script>
    <script th:src="@{js/scripts/productos.js}" type="text/javascript"></script>
   <script  th:src="@{/js/scripts/scripts.js}" type="text/javascript"> </script>

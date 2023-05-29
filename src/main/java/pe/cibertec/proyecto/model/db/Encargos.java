@@ -1,6 +1,6 @@
 package pe.cibertec.proyecto.model.db;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,10 +26,10 @@ public class Encargos {
 	private double enc_anticipo;
 	
 	@Column(name = "enc_fechacreacion")
-	private Date enc_fechaCreacion;
+	private Date enc_fechacreacion;
 	
 	@Column(name = "enc_fechaentrega")
-	private Date enc_fechaEntrega;
+	private Date enc_fechaentrega;
 	
 	@Column(name = "enc_estado")
 	private String enc_estado;
